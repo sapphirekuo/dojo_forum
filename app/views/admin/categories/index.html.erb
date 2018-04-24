@@ -8,6 +8,15 @@
     <%= link_to 'User List', admin_users_path %>
   </div>
 
+  <div class="form-inline" >
+    <%= form_for [:admin, @category] do |f| %>
+      <div class="form-group">
+        <%= f.text_field :name, placeholder: "Category Name",  class: "form-control" %>
+      </div>
+      <%= f.submit class: "btn btn-primary" %>
+    <% end %>
+  </div>
+
   <div class="row">
 
     <div class="col-md-12">
