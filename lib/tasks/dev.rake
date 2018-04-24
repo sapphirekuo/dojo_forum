@@ -35,6 +35,7 @@ namespace :dev do
     User.all.each do |user|
       rand(2..5).times do |i|
          user.posts.create!(
+          title: FFaker::Lorem::sentence(2),
           description: FFaker::Lorem::sentence(10),
           category: Category.all.sample
         )

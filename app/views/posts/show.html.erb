@@ -1,0 +1,71 @@
+<div class="container">
+  <h1><%= @post.title %></h1>
+  <!-- Collect btn -->
+  <!-- Comment btn -->
+
+  <table class="table table-striped table-bordered table-hover">
+        <thead class="thead-dark">
+          <tr>
+            <th>
+              <%= image_tag @post.user.avatar %>
+              <%= @post.user.name %> 
+              <% if @post.user != current_user %>
+                <%= link_to "Add Friend" %>
+              <% end %>
+            </th>
+            <th>
+              <%= @post.image %> 
+              <%= @post.description %> 
+              <% if @post.user == current_user %>
+                <%= link_to 'Edit', edit_post_path(@post) %>
+                <%= link_to 'Delete', post_path(@post), method: :delete, data: {confirm:"Are you sure?"} %>
+              <% elsif current_user.admin? %>
+                <%= link_to 'Delete', post_path(@post), method: :delete, data: {confirm:"Are you sure?"} %>                
+              <% end %>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @post.replies.each do |reply| %>
+          <tr class="table-primary">
+            <td>
+              <%= image_tag reply.user.avatar %>
+              <%= reply.user.name %>
+              <% if reply.user != current_user %>
+               <%= link_to "Add Friend" %>
+              <% end %>
+            <td>
+              <%= reply.comment %>
+              <% if reply.user == current_user %>
+                <%= link_to 'Edit', edit_post_reply_path(@post, reply) %>
+                <%= link_to 'Delete', post_reply_path(@post, reply), method: :delete, data: {confirm:"Are you sure?"} %>
+              <% elsif current_user.admin? %>
+                <%= link_to 'Delete', post_reply_path(@post, reply), method: :delete, data: {confirm:"Are you sure?"} %>
+              <% end %>
+
+            </td>
+          </tr>
+          <% end %>
+
+          <tr>
+            <td colspan="2">
+              <div class="form-group comment-group">  
+                <%= form_for [@post, @reply] do |f|%>
+                  <div class="form-group">
+                    <%= f.text_area :comment, placeholder: "add comment", class: "form-control" %>
+                  </div>
+                  <div class="form-group">
+                    <%= f.submit class: "btn btn-primary" %>
+                  </div>
+                <% end%>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="text-center">
+        <%= paginate @replies %>
+      </div>
+
+</div>
