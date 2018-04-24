@@ -8,6 +8,6 @@
     <%= link_to 'Delete', admin_post_path(post), method: :delete, data: {confirm:"Are you sure?"} %>
   </li>
   <% end %>
-  <%= paginate @restaurants %>
+  <%= paginate @posts %>
 </ul>
 <%= link_to 'New post', new_admin_post_path %>
