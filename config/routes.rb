@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     resources :replies
   end
   resources :categories, only: :show
+  resources :users, only: [:show, :edit, :update]
 
   namespace :admin do
     root "categories#index"

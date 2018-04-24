@@ -29,6 +29,7 @@
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="pull-right text-right nav navbar-nav">
           <% if current_user %>
+            <li><%= link_to 'Profile', user_path(current_user) %></li>
             <% if current_user.admin? %>
               <li><%= link_to 'Admin後台', admin_categories_path %></li>
             <% end %>

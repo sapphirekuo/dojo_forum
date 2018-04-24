@@ -1,0 +1,48 @@
+<div class="container">
+  <div class="row">
+    <%= render partial: "shared/user_top" %>
+
+    <ul class="nav nav-tabs">
+      <li role="presentation" class="nav-link active">
+        <%= link_to 'My Post', user_path(@user) %> 
+      </li>
+
+      <li role="presentation" class="nav-link">
+        <%= link_to 'My Comment', user_path(@user) %>
+      </li>
+
+      <li role="presentation" class="nav-link">
+        <%= link_to 'My Collect', user_path(@user) %>
+      </li>
+
+      <li role="presentation" class="nav-link">
+        <%= link_to 'My Draft', user_path(@user) %>
+      </li>
+
+      <li role="presentation" class="nav-link">
+        <%= link_to 'My Friend', user_path(@user) %>
+      </li>
+    </ul>
+<br />
+
+      <table class="table table-striped table-bordered">
+        <tbody>
+          <% @user.posts.each do |post| %>
+          <tr>
+            <td><%= link_to post.title, post_path(post) %></td>
+            <td>
+              <%= post.status %>
+            </td>
+            <td>
+              <%= (post.created_at).strftime("%Y-%m-%d") %>
+            </td>
+            <td>
+              <%= link_to 'Edit', edit_post_path(post) %>
+              <%= link_to 'Delete', post_path(post), method: :delete, data: {confirm:"Are you sure?"} %>
+            </td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+  </div>
+</div>
