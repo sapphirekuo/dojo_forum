@@ -1,0 +1,8 @@
+namespace :dev do
+  task fake: :environment do
+    
+    puts "have created fake restaurants"
+  end
+
+  
+end
