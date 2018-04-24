@@ -14,7 +14,7 @@
               <% end %>
             </th>
             <th>
-              <%= @post.image %> 
+              <%= image_tag @post.image, style:"width: 90px; height: auto;" %> 
               <%= @post.description %> 
               <% if @post.user == current_user %>
                 <%= link_to 'Edit', edit_post_path(@post) %>
