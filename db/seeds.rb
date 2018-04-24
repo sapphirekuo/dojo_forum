@@ -7,6 +7,20 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
-#create admin user
+# create admin user
 User.create(email: "admin@example.com", password: "12345678", role: "admin")
 puts "Default admin created!"
+
+# create catefories
+Category.destroy_all
+
+category_list = [
+  { name: "Cat" },
+  { name: "Dog" },
+  { name: "Hamster" }
+]
+
+category_list.each do |category|
+  Category.create( name: category[:name] )
+end
+puts "Category created!"
