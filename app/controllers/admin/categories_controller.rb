@@ -14,7 +14,6 @@ class Admin::CategoriesController < ApplicationController
       redirect_to admin_categories_path
     else
       @categories = Category.all
-      flash[:alert] = "category name is required"
       render :index
     end
   end
