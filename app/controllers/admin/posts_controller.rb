@@ -1,5 +1,4 @@
-class Admin::PostsController < ApplicationController
-  before_action :authenticate_admin
+class Admin::PostsController < Admin::BaseController
   
   def index
     @posts = Post.all
