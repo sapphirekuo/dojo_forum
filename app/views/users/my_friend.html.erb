@@ -1,0 +1,52 @@
+<div class="container">
+  <div class="row">
+    <%= render partial: "shared/user_top" %>
+
+    <ul class="nav nav-tabs">
+      <li role="presentation" class="nav-link">
+        <%= link_to 'My Post', user_path(@user) %> 
+      </li>
+
+      <li role="presentation" class="nav-link">
+        <%= link_to 'My Comment', my_comment_user_path(@user) %>
+      </li>
+
+      <li role="presentation" class="nav-link">
+        <%= link_to 'My Collect', my_collect_user_path(@user) %>
+      </li>
+
+      <li role="presentation" class="nav-link">
+        <%= link_to 'My Draft', my_draft_user_path(@user) %>
+      </li>
+
+      <li role="presentation" class="nav-link active">
+        <%= link_to 'My Friend', my_friend_user_path(@user) %>
+      </li>
+    </ul>
+<br />
+
+
+    <h3>waiting for response </h3>
+    <% @user.friend_waiting.each do |user| %>
+      <%= image_tag user.avatar %>
+      <%= link_to user.name, user_path(user) %> 
+      <div class="clearfix"></div>
+    <% end %>
+<hr />
+    <% @user.friendly_to_accept.each do |user| %>
+      <%= image_tag user.avatar %>
+      <%= link_to user.name, user_path(user) %> 
+      <div id="post-friend">
+        <%= render partial: "shared/friend", locals: {user: user} %>
+      </div> 
+      <div class="clearfix"></div>
+    <% end %>
+<hr />
+    <% @user.friended.each do |user| %>
+      <%= image_tag user.avatar %>
+      <%= link_to user.name, user_path(user) %> 
+      <div class="clearfix"></div>
+    <% end %>
+
+  </div>
+</div>

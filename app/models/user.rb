@@ -26,7 +26,7 @@ class User < ApplicationRecord
     self.friends.include?(user)
   end
 
-  def friendlys?(user)
+  def friendly?(user)
     self.friendlys.include?(user)
   end
 
@@ -35,6 +35,17 @@ class User < ApplicationRecord
   end
 
   def friended
-    
+    friends = (self.friends + self.friendlys)
+
+    friended = friends.select{|item| friends.count(item) > 1}.uniq
+  end
+
+
+  def friend_waiting
+    friend_waiting = self.friends - self.friended    
+  end
+
+  def friendly_to_accept
+    friendly_to_accept = self.friendlys - self.friended
   end
 end
