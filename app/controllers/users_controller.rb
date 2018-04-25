@@ -21,6 +21,7 @@ class UsersController < ApplicationController
   end
 
   def my_collect
+    @posts = @user.collected_posts
 
   end
 

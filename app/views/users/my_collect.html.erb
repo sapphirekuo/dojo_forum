@@ -1,0 +1,39 @@
+<div class="container">
+  <div class="row">
+    <%= render partial: "shared/user_top" %>
+
+    <ul class="nav nav-tabs">
+      <li role="presentation" class="nav-link">
+        <%= link_to 'My Post', user_path(@user) %> 
+      </li>
+
+      <li role="presentation" class="nav-link">
+        <%= link_to 'My Comment', my_comment_user_path(@user) %>
+      </li>
+
+      <li role="presentation" class="nav-link active">
+        <%= link_to 'My Collect', my_collect_user_path(@user) %>
+      </li>
+
+      <li role="presentation" class="nav-link">
+        <%= link_to 'My Draft', my_draft_user_path(@user) %>
+      </li>
+
+      <li role="presentation" class="nav-link">
+        <%= link_to 'My Friend', my_friend_user_path(@user) %>
+      </li>
+    </ul>
+<br />
+
+    <% @posts.each do |post| %>
+      <%= post.title %>
+      <% if post.is_collected?(current_user) %>
+        <%= link_to 'Uncollect', uncollect_post_path(post), method: :post, class: "btn btn-info" %>
+      <% else %>
+        <%= link_to 'Collect', collect_post_path(post), method: :post, class: "btn btn-primary" %>
+      <% end %>
+      <div class="clearfix"></div>
+    <% end %>
+
+  </div>
+</div>
