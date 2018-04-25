@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="row">
+    <%= render partial: "shared/user_top" %>
+
+    <ul class="nav nav-tabs">
+      <li role="presentation" class="nav-link">
+        <%= link_to 'My Post', user_path(@user) %> 
+      </li>
+
+      <li role="presentation" class="nav-link active">
+        <%= link_to 'My Comment', my_comment_user_path(@user) %>
+      </li>
+
+      <li role="presentation" class="nav-link">
+        <%= link_to 'My Collect', my_collect_user_path(@user) %>
+      </li>
+
+      <li role="presentation" class="nav-link">
+        <%= link_to 'My Draft', my_draft_user_path(@user) %>
+      </li>
+
+      <li role="presentation" class="nav-link">
+        <%= link_to 'My Friend', my_friend_user_path(@user) %>
+      </li>
+    </ul>
+<br />
+
+
+    <% @user.replies.each do |reply| %>
+      <h4><%= link_to reply.post.title, post_path(reply.post) %></h4>
+      <div class="form-group col-xs-8">
+        <textarea class="form-control" rows="3" > <%= reply.comment %> </textarea>
+      </div>
+      <div class="col-xs-4">
+        <%= link_to 'Edit', edit_post_reply_path(reply.post, reply) %>
+        <%= link_to 'Delete', post_reply_path(reply.post, reply), method: :delete, data: {confirm:"Are you sure?"} %>
+      </div>
+    <div class="clearfix"></div>
+    <% end %>
+  </div>
+</div>

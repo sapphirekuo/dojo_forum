@@ -6,7 +6,14 @@ Rails.application.routes.draw do
     resources :replies
   end
   resources :categories, only: :show
-  resources :users, only: [:show, :edit, :update]
+  resources :users, only: [:show, :edit, :update] do
+    member do
+      get :my_comment
+      get :my_collect
+      get :my_draft
+      get :my_friend
+    end
+  end
 
   namespace :admin do
     root "categories#index"

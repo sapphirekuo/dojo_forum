@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update]
+  before_action :set_user
  
-   def show
+  def show
   end
 
   def edit
@@ -13,6 +13,22 @@ class UsersController < ApplicationController
   def update
     @user.update(user_params)
     redirect_to user_path(@user)
+  end
+
+  def my_comment
+    
+  end
+
+  def my_collect
+
+  end
+
+  def my_draft
+    
+  end
+
+  def my_friend
+    
   end
 
   private
