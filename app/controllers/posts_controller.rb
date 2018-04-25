@@ -28,6 +28,15 @@ class PostsController < ApplicationController
     end
   end
 
+  def feeds
+    @users = User.all
+    @posts = Post.all
+    @replies = Reply.all
+    @chatterbox = User.order(replies_count: :desc).limit(10)
+    @top10_posts = Post.order(replies_count: :desc).limit(10)
+    
+  end
+
   private
 
   def post_params
