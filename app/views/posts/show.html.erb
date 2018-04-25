@@ -12,9 +12,9 @@
             <th>
               <%= image_tag @post.user.avatar %>
               <%= link_to @post.user.name, user_path(@post.user) %> 
-              <% if @post.user != current_user %>
-                <%= link_to "Add Friend" %>
-              <% end %>
+              <div id="post-friend">
+                <%= render partial: "shared/friend", locals: {user: @post.user} %>
+              </div>              
             </th>
             <th>
               <%= image_tag @post.image, style:"width: 90px; height: auto;" %> 
@@ -34,9 +34,9 @@
             <td>
               <%= image_tag reply.user.avatar %>
               <%= link_to reply.user.name, user_path(reply.user) %> 
-              <% if reply.user != current_user %>
-               <%= link_to "Add Friend" %>
-              <% end %>
+              <div id="reply-friend">
+                <%= render partial: "shared/friend", locals: {user: reply.user} %>
+              </div>             
             <td>
               <%= reply.comment %>
               <% if reply.user == current_user %>

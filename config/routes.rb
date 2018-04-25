@@ -24,6 +24,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :friendships, only: [:create, :destroy]
+
   namespace :admin do
     root "categories#index"
     resources :categories
