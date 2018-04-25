@@ -1,11 +1,12 @@
 class PostsController < ApplicationController
+  before_action :set_post, only: [:show, :edit, :update]
+
   def index
     @posts = Post.where(status: "Published").page(params[:page]).per(20)
     @categories = Category.all
   end
 
   def show
-    @post = Post.find(params[:id])
     @replies = @post.replies.page(params[:page]).per(20)
     @reply = Reply.new
     # @post.views_count += 1
@@ -19,8 +20,7 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.user = current_user
-    if @post.save
-      
+    if @post.save      
       if published?
         flash[:notice] = "post was successfully created"
         @post.status = "Published"
@@ -37,6 +37,31 @@ class PostsController < ApplicationController
       flash.now[:alert] = "post was failed to create"
       render :new
     end
+  end
+
+  def edit
+    @categories = Category.all
+  end
+
+  def update
+    @post.user = current_user
+    if @post.save      
+      if published?
+        flash[:notice] = "post was successfully created"
+        @post.status = "Published"
+        @post.save
+        redirect_to posts_path
+      elsif draft?
+        flash[:notice] = "post was save as draft"
+        @post.status = "Draft"
+        @post.save
+        redirect_to my_draft_user_path(current_user)
+      end
+      
+    else
+      flash.now[:alert] = "post was failed to create"
+      render :new
+    end   
   end
 
   def feeds
@@ -61,6 +86,10 @@ class PostsController < ApplicationController
   end
 
   private
+
+  def set_post
+    @post = Post.find(params[:id])
+  end
 
   def post_params
     params.require(:post).permit(:title, :description, :image, :categoty_id, :status)
