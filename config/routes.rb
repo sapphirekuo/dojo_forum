@@ -4,6 +4,9 @@ Rails.application.routes.draw do
   root "posts#index" 
   resources :posts do
     resources :replies
+    collection do
+      get :feeds
+    end
   end
   resources :categories, only: :show
   resources :users, only: [:show, :edit, :update] do
