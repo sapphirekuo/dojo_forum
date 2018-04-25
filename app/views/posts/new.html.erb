@@ -51,14 +51,9 @@
       </div>
 
       <div class="form-group">
-        <%= f.submit class: "btn btn-primary" %>
+        <%= f.submit "Save as Draft", class: "btn btn-default" %>
+        <%= f.submit "Publish", class: "btn btn-primary" %>
       </div>
-    <% end %>
-
-    <%= form_for @post do |f| %>
-      <%= f.text_field :title, class: "form-control", placeholder: "Title" %>
-      <%= f.collection_radio_buttons :category_id, Category.all, :id, :name %>
-      <%= f.submit %>
     <% end %>
   </div>
 </div>

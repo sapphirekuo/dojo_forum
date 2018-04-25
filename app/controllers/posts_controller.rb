@@ -20,8 +20,19 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
     @post.user = current_user
     if @post.save
-      flash[:notice] = "post was successfully created"
-      redirect_to posts_path
+      
+      if published?
+        flash[:notice] = "post was successfully created"
+        @post.status = "Published"
+        @post.save
+        redirect_to posts_path
+      elsif draft?
+        flash[:notice] = "post was save as draft"
+        @post.status = "Draft"
+        @post.save
+        redirect_to my_draft_user_path(current_user)
+      end
+      
     else
       flash.now[:alert] = "post was failed to create"
       render :new
@@ -52,7 +63,15 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title, :description, :image, :categoty_id)
+    params.require(:post).permit(:title, :description, :image, :categoty_id, :status)
+  end
+
+  def published?
+    params[:commit] == "Publish"   
+  end
+
+  def draft?
+    params[:commit] == "Save as Draft"
   end
 
 end
