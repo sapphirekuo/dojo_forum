@@ -13,7 +13,7 @@ namespace :dev do
 
     20.times do |i|
       user_name = FFaker::Name.first_name
-      file = File.open("#{Rails.root}/public/avatar/user#{i+1}.jpg")
+      file = Rails.root.join( "public/avatar/user#{i+1}.jpg").open
       user = User.create!(
         email: "#{user_name}@example.com",
         password: "12345678",

@@ -1,10 +1,8 @@
 <div class="container">
   <h1><%= @post.title %></h1>
-    <% if @post.is_collected?(current_user) %>
-      <%= link_to 'Uncollect', uncollect_post_path(@post), method: :post, class: "btn btn-info" %>
-    <% else %>
-      <%= link_to 'Collect', collect_post_path(@post), method: :post, class: "btn btn-primary" %>
-    <% end %>
+    <div id="collect-btn">
+      <%= render partial: "shared/collect_btn" %>
+    </div>
 
   <!-- Comment btn -->
 

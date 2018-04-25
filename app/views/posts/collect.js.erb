@@ -1,0 +1,3 @@
+<% html = j( render :partial => "shared/collect_btn", :locals => { :@post => @post } ) %>
+var collect_btn_div = $("#collect-btn");
+$(collect_btn_div).html("<%= html %>");
