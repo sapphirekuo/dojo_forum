@@ -3,7 +3,7 @@
     <%= render partial: "shared/user_top" %>
 
     <ul class="nav nav-tabs">
-      <li role="presentation" class="nav-link active">
+      <li role="presentation" class="nav-link">
         <%= link_to 'My Post', user_path(@user) %> 
       </li>
 
@@ -15,7 +15,7 @@
         <%= link_to 'My Collect', my_collect_user_path(@user) %>
       </li>
 
-      <li role="presentation" class="nav-link">
+      <li role="presentation" class="nav-link active">
         <%= link_to 'My Draft', my_draft_user_path(@user) %>
       </li>
 
@@ -26,5 +26,6 @@
 <br />
 
     <%= render partial: "shared/user_posts" %>
+
   </div>
 </div>

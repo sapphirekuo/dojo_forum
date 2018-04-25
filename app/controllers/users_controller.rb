@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   before_action :set_user
  
   def show
+    @posts = @user.posts.where(status: "Published")
   end
 
   def edit
@@ -24,7 +25,8 @@ class UsersController < ApplicationController
   end
 
   def my_draft
-    
+    @posts = @user.posts.where(status: "Draft")
+     
   end
 
   def my_friend

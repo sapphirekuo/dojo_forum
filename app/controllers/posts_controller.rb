@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   def index
-    @posts = Post.page(params[:page]).per(20)
+    @posts = Post.where(status: "Published").page(params[:page]).per(20)
     @categories = Category.all
   end
 
@@ -30,7 +30,7 @@ class PostsController < ApplicationController
 
   def feeds
     @users = User.all
-    @posts = Post.all
+    @posts = Post.where(status: "Published").all
     @replies = Reply.all
     @chatterbox = User.order(replies_count: :desc).limit(10)
     @top10_posts = Post.order(replies_count: :desc).limit(10)

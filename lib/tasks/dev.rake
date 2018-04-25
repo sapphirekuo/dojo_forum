@@ -37,7 +37,19 @@ namespace :dev do
          user.posts.create!(
           title: FFaker::Lorem::sentence(2),
           description: FFaker::Lorem::sentence(10),
-          category: Category.all.sample
+          category: Category.all.sample,
+          status: "Published"
+        )
+      end
+    end
+
+    User.all.each do |user|
+      rand(2..3).times do |i|
+         user.posts.create!(
+          title: FFaker::Lorem::sentence(2),
+          description: FFaker::Lorem::sentence(10),
+          category: Category.all.sample,
+          status: "Draft"
         )
       end
     end
