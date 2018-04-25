@@ -7,7 +7,13 @@ Rails.application.routes.draw do
     collection do
       get :feeds
     end
+
+    member do
+      post :collect
+      post :uncollect
+    end
   end
+
   resources :categories, only: :show
   resources :users, only: [:show, :edit, :update] do
     member do
