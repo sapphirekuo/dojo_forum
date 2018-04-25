@@ -30,7 +30,7 @@
           <tr class="table-primary">
             <td>
               <%= image_tag reply.user.avatar %>
-              <%= reply.user.name %>
+              <%= link_to reply.user.name, user_path(reply.user) %> 
               <% if reply.user != current_user %>
                <%= link_to "Add Friend" %>
               <% end %>
