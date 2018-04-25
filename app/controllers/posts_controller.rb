@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:show, :edit, :update]
+  before_action :set_post, only: [:show, :edit, :update, :destroy]
 
   def index
     @posts = Post.where(status: "Published").page(params[:page]).per(20)
@@ -62,6 +62,12 @@ class PostsController < ApplicationController
       flash.now[:alert] = "post was failed to create"
       render :new
     end   
+  end
+
+  def destroy
+    @post.destroy
+    redirect_to root_path
+    flash[:alert] = "post was deleted"
   end
 
   def feeds
