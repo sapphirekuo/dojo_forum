@@ -10,5 +10,10 @@ class Post < ApplicationRecord
 
   validates_presence_of :title
 
+    
+  def is_collected?(user)
+    self.collected_users.include?(user)
+  end
+
   
 end

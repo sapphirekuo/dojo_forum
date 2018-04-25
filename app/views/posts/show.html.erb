@@ -1,6 +1,11 @@
 <div class="container">
   <h1><%= @post.title %></h1>
-  <!-- Collect btn -->
+    <% if @post.is_collected?(current_user) %>
+      <%= link_to 'Uncollect', uncollect_post_path(@post), method: :post, class: "btn btn-info" %>
+    <% else %>
+      <%= link_to 'Collect', collect_post_path(@post), method: :post, class: "btn btn-primary" %>
+    <% end %>
+
   <!-- Comment btn -->
 
   <table class="table table-striped table-bordered table-hover">

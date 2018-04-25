@@ -33,8 +33,20 @@ class PostsController < ApplicationController
     @posts = Post.where(status: "Published").all
     @replies = Reply.all
     @chatterbox = User.order(replies_count: :desc).limit(10)
-    @top10_posts = Post.order(replies_count: :desc).limit(10)
-    
+    @top10_posts = Post.order(replies_count: :desc).limit(10) 
+  end
+
+  def collect
+    @post = Post.find(params[:id])
+    @post.collects.create!(user: current_user)
+    redirect_back(fallback_location: root_path)  # 導回上一頁
+  end
+
+  def uncollect
+    @post = Post.find(params[:id])
+    collects = Collect.where(post: @post, user: current_user)
+    collects.destroy_all
+    redirect_back(fallback_location: root_path)
   end
 
   private
@@ -42,4 +54,6 @@ class PostsController < ApplicationController
   def post_params
     params.require(:post).permit(:title, :description, :image, :categoty_id)
   end
+
 end
+
