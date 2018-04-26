@@ -40,7 +40,7 @@
             <td>
               <%= reply.comment %>
               <% if reply.user == current_user %>
-                <%= link_to 'Edit', edit_post_reply_path(@post, reply) %>
+                <%= link_to 'Edit', post_path(@post, reply_id: reply.id, anchor: "comment-form") %>
                 <%= link_to 'Delete', post_reply_path(@post, reply), method: :delete, data: {confirm:"Are you sure?"} %>
               <% elsif current_user.admin? %>
                 <%= link_to 'Delete', post_reply_path(@post, reply), method: :delete, data: {confirm:"Are you sure?"} %>
@@ -52,7 +52,7 @@
 
           <tr>
             <td colspan="2">
-              <div class="form-group comment-group">  
+              <div class="form-group comment-group" id="comment-form">  
                 <%= form_for [@post, @reply] do |f|%>
                   <div class="form-group">
                     <%= f.text_area :comment, placeholder: "add comment", class: "form-control" %>
