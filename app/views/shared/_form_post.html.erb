@@ -26,7 +26,7 @@
       </div>
 
       <h4> Category </h4>  
-      <!-- <%= f.collection_radio_buttons :category_id, Category.all, :id, :name %> -->
+      <%= f.collection_check_boxes :category_id, Category.all, :id, :name %>
       
       <h4> Who Can See </h4>
       <%= f.collection_radio_buttons :authorized, [["all", " all "] ,["friends", " friends "], ["self", " self "]], :first, :last %> 

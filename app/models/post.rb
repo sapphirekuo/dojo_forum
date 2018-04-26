@@ -8,7 +8,7 @@ class Post < ApplicationRecord
 
   mount_uploader :image, PhotoUploader
 
-  validates_presence_of :title
+  validates_presence_of :title, :authorized
 
     
   def is_collected?(user)
