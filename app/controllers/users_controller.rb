@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_action :set_user
  
   def show
-    @posts = @user.posts.where(status: "Published")
+    @posts = @user.posts.readable_by(current_user).where(status: "Published")
   end
 
   def edit
@@ -21,7 +21,7 @@ class UsersController < ApplicationController
   end
 
   def my_collect
-    @posts = @user.collected_posts
+    @posts = @user.collected_posts.readable_by(current_user)
 
   end
 

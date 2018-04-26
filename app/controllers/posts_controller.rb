@@ -2,18 +2,22 @@ class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
 
   def index
-    @posts = Post.where(status: "Published").order(created_at: :desc).page(params[:page]).per(20)
+    @posts = Post.readable_by(current_user).order(created_at: :desc).page(params[:page]).per(20)
     @categories = Category.all
   end
 
   def show
-    @replies = @post.replies.page(params[:page]).per(20)
-    if params[:reply_id]
-      @reply = Reply.find(params[:reply_id])
+    if @post.readable_by(current_user)
+      @replies = @post.replies.page(params[:page]).per(20)
+      if params[:reply_id]
+        @reply = Reply.find(params[:reply_id])
+      else
+        @reply = Reply.new
+      end
     else
-      @reply = Reply.new
+      redirect_to posts_path
+      flash[:alert] = "you are not authorized to see that post"
     end
-    
     # @post.views_count += 1
   end
 
@@ -44,14 +48,19 @@ class PostsController < ApplicationController
   end
 
   def edit
-    @categories = Category.all
+    if @post.user == current_user
+      @categories = Category.all
+    else
+      redirect_to posts_path
+      flash[:alert] = "you are not allowed to edit other's post"
+    end
   end
 
   def update
     @post.user = current_user
     if @post.save      
       if published?
-        flash[:notice] = "post was successfully created"
+        flash[:notice] = "post was successfully updated"
         @post.status = "Published"
         @post.save
         redirect_to posts_path
@@ -63,7 +72,7 @@ class PostsController < ApplicationController
       end
       
     else
-      flash.now[:alert] = "post was failed to create"
+      flash.now[:alert] = "post was failed to update"
       render :edit
     end   
   end

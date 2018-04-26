@@ -27,15 +27,17 @@
 
 
     <% @user.replies.each do |reply| %>
-      <h4><%= link_to reply.post.title, post_path(reply.post) %></h4>
-      <div class="form-group col-xs-8">
-        <textarea class="form-control" rows="3" > <%= reply.comment %> </textarea>
-      </div>
-      <div class="col-xs-4">
-        <%= link_to 'Edit', edit_post_reply_path(reply.post, reply) %>
-        <%= link_to 'Delete', post_reply_path(reply.post, reply), method: :delete, data: {confirm:"Are you sure?"} %>
-      </div>
-    <div class="clearfix"></div>
+      <% if reply.post.readable_by(current_user) %>
+        <h4><%= link_to reply.post.title, post_path(reply.post) %></h4>
+        <div class="form-group col-xs-8">
+          <textarea class="form-control" rows="3" > <%= reply.comment %> </textarea>
+        </div>
+        <div class="col-xs-4">
+          <%= link_to 'Edit', edit_post_reply_path(reply.post, reply) %>
+          <%= link_to 'Delete', post_reply_path(reply.post, reply), method: :delete, data: {confirm:"Are you sure?"} %>
+        </div>
+      <div class="clearfix"></div>
+      <% end %>
     <% end %>
   </div>
 </div>
