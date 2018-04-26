@@ -3,6 +3,9 @@
     <div id="collect-btn">
       <%= render partial: "shared/collect_btn" %>
     </div>
+    <div id="comment-btn">
+      <%= link_to 'Comment', post_path(@post, anchor: "comment-form"), class: "btn btn-primary" %>
+    </div>
 
   <!-- Comment btn -->
 

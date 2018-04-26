@@ -24,8 +24,11 @@
       </li>
     </ul>
 <br />
-
-    <%= render partial: "shared/user_posts" %>
+    <% if @user == current_user %>
+      <%= render partial: "shared/user_posts" %>
+    <% else %>
+      <p>You are not allowed to see drafts</p>
+    <% end %>
 
   </div>
 </div>
