@@ -2,7 +2,7 @@ class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
 
   def index
-    @posts = Post.where(status: "Published").page(params[:page]).per(20)
+    @posts = Post.where(status: "Published").order(created_at: :desc).page(params[:page]).per(20)
     @categories = Category.all
   end
 
@@ -31,8 +31,7 @@ class PostsController < ApplicationController
         @post.status = "Draft"
         @post.save
         redirect_to my_draft_user_path(current_user)
-      end
-      
+      end      
     else
       flash.now[:alert] = "post was failed to create"
       render :new
@@ -60,7 +59,7 @@ class PostsController < ApplicationController
       
     else
       flash.now[:alert] = "post was failed to create"
-      render :new
+      render :edit
     end   
   end
 
@@ -98,11 +97,11 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:title, :description, :image, :categoty_id, :status)
+    params.require(:post).permit(:title, :description, :image, :categoty_id, :status, :authorized)
   end
 
   def published?
-    params[:commit] == "Publish"   
+    params[:commit] == "Create Post" || params[:commit] == "Update Post"   
   end
 
   def draft?
