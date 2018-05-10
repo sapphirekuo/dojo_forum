@@ -38,7 +38,8 @@ namespace :dev do
           title: FFaker::Lorem::sentence(2),
           description: FFaker::Lorem::sentence(10),
           category: Category.all.sample,
-          status: "Published"
+          status: "Published",
+          authorized: "all"
         )
       end
     end
@@ -49,7 +50,8 @@ namespace :dev do
           title: FFaker::Lorem::sentence(2),
           description: FFaker::Lorem::sentence(10),
           category: Category.all.sample,
-          status: "Draft"
+          status: "Draft",
+          authorized: "all"
         )
       end
     end

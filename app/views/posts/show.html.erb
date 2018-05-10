@@ -10,68 +10,70 @@
   <!-- Comment btn -->
 
   <table class="table table-striped table-bordered table-hover">
-        <thead class="thead-dark">
-          <tr>
-            <th>
-              <%= image_tag @post.user.avatar %>
-              <%= link_to @post.user.name, user_path(@post.user) %> 
-              <div id="post-friend">
-                <%= render partial: "shared/friend", locals: {user: @post.user} %>
-              </div>              
-            </th>
-            <th>
-              <%= image_tag @post.image, style:"width: 90px; height: auto;" %> 
-              <%= @post.description %> 
-              <% if @post.user == current_user %>
-                <%= link_to 'Edit', edit_post_path(@post) %>
-                <%= link_to 'Delete', post_path(@post), method: :delete, data: {confirm:"Are you sure?"} %>
-              <% elsif current_user.admin? %>
-                <%= link_to 'Delete', post_path(@post), method: :delete, data: {confirm:"Are you sure?"} %>                
-              <% end %>
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @post.replies.each do |reply| %>
-          <tr class="table-primary">
-            <td>
-              <%= image_tag reply.user.avatar %>
-              <%= link_to reply.user.name, user_path(reply.user) %> 
-              <div id="reply-friend">
-                <%= render partial: "shared/friend", locals: {user: reply.user} %>
-              </div>             
-            <td>
-              <%= reply.comment %>
-              <% if reply.user == current_user %>
-                <%= link_to 'Edit', post_path(@post, reply_id: reply.id, anchor: "comment-form") %>
-                <%= link_to 'Delete', post_reply_path(@post, reply), method: :delete, data: {confirm:"Are you sure?"} %>
-              <% elsif current_user.admin? %>
-                <%= link_to 'Delete', post_reply_path(@post, reply), method: :delete, data: {confirm:"Are you sure?"} %>
-              <% end %>
-
-            </td>
-          </tr>
+    <thead class="thead-dark">
+      <tr>
+        <th>
+          <%= image_tag @post.user.avatar %>
+          <%= link_to @post.user.name, user_path(@post.user) %> 
+          <div id="post-friend">
+            <%= render partial: "shared/friend", locals: {user: @post.user} %>
+          </div>              
+        </th>
+        <th>
+          <%= image_tag @post.image, style:"width: 90px; height: auto;" %> 
+          <%= @post.description %> 
+          <% if @post.user == current_user %>
+            <%= link_to 'Edit', edit_post_path(@post) %>
+            <%= link_to 'Delete', post_path(@post), method: :delete, data: {confirm:"Are you sure?"} %>
+          <% elsif current_user.admin? %>
+            <%= link_to 'Delete', post_path(@post), method: :delete, data: {confirm:"Are you sure?"} %>                
+          <% end %>
+        </th>
+      </tr>
+    </thead>
+  </table>
+  <table class="table table-striped table-bordered table-hover">
+    <tbody>
+      <% @post.replies.each do |reply| %>
+      <tr class="table-primary">
+        <td>
+          <%= image_tag reply.user.avatar %>
+          <%= link_to reply.user.name, user_path(reply.user) %> 
+          <div id="reply-friend">
+            <%= render partial: "shared/friend", locals: {user: reply.user} %>
+          </div>             
+        <td>
+          <%= reply.comment %>
+          <% if reply.user == current_user %>
+            <%= link_to 'Edit', post_path(@post, reply_id: reply.id, anchor: "comment-form") %>
+            <%= link_to 'Delete', post_reply_path(@post, reply), method: :delete, data: {confirm:"Are you sure?"} %>
+          <% elsif current_user.admin? %>
+            <%= link_to 'Delete', post_reply_path(@post, reply), method: :delete, data: {confirm:"Are you sure?"} %>
           <% end %>
 
-          <tr>
-            <td colspan="2">
-              <div class="form-group comment-group" id="comment-form">  
-                <%= form_for [@post, @reply] do |f|%>
-                  <div class="form-group">
-                    <%= f.text_area :comment, placeholder: "add comment", class: "form-control" %>
-                  </div>
-                  <div class="form-group">
-                    <%= f.submit class: "btn btn-primary" %>
-                  </div>
-                <% end%>
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+        </td>
+      </tr>
+      <% end %>
 
-      <div class="text-center">
-        <%= paginate @replies %>
-      </div>
+      <tr>
+        <td colspan="2">
+          <div class="form-group comment-group" id="comment-form">  
+            <%= form_for [@post, @reply] do |f|%>
+              <div class="form-group">
+                <%= f.text_area :comment, placeholder: "add comment", class: "form-control" %>
+              </div>
+              <div class="form-group">
+                <%= f.submit class: "btn btn-primary" %>
+              </div>
+            <% end%>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="text-center">
+    <%= paginate @replies %>
+  </div>
 
 </div>
