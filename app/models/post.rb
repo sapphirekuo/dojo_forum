@@ -23,5 +23,9 @@ class Post < ApplicationRecord
     Post.readable_by(user).include?(self)
   end
 
+  def count_view
+    self.views_count += 1
+    self.save
+  end
   
 end

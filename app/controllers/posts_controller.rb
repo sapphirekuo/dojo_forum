@@ -19,6 +19,7 @@ class PostsController < ApplicationController
       flash[:alert] = "you are not authorized to see that post"
     end
     # @post.views_count += 1
+    @post.count_view
   end
 
   def new
