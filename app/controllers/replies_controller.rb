@@ -1,4 +1,5 @@
 class RepliesController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_reply, only: [:update, :destroy]
 
   def create
