@@ -10,7 +10,7 @@ class Api::V1::PostsController < ApiController
   end
 
   def show
-  @post = Post.readable_by(current_user).find_by(id: params[:id])
+  @post = Post.readable_by(current_user).where(status: "Published").find_by(id: params[:id])
     if !@post
       render json: {
         message: "Can't find the post!",

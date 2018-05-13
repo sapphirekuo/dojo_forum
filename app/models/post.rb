@@ -16,7 +16,7 @@ class Post < ApplicationRecord
   end
 
   def self.readable_by(user)
-    Post.where(authorized: "friends", user: user.friends).or(Post.where(authorized: "all")).or(Post.where(user: user))  
+    Post.where(authorized: "friends", user: user.all_friends).or(Post.where(authorized: "all")).or(Post.where(user: user))  
   end
 
   def readable_by(user)
