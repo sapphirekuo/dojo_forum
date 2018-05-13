@@ -13,7 +13,7 @@ class PostsController < ApplicationController
   end
 
   def show
-    if @post.readable_by(current_user)
+    if @post.readable_by(current_user) && @post.status == "Published"
       @replies = @post.replies.page(params[:page]).per(20)
       if params[:reply_id]
         @reply = Reply.find(params[:reply_id])
