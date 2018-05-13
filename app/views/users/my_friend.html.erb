@@ -28,27 +28,37 @@
   <br />
 
 
-      <h3>waiting for response </h3>
+      <h3>Waiting for response </h3>
+      
       <% @user.friend_waiting.each do |user| %>
-        <%= image_tag user.avatar %>
-        <%= link_to user.name, user_path(user) %> 
-        <div class="clearfix"></div>
+        <div class="col-xs-4 col-sm-3">
+          <%= image_tag user.avatar, class: "img-responsive img-rounded"%>
+          <%= link_to user.name, user_path(user) %> 
+          <div class="clearfix"></div>
+        </div>
       <% end %>
+      <div class="clearfix"></div>
   <hr />
+      <h3>Friends to be accepted</h3>
       <% @user.friendly_to_accept.each do |user| %>
-        <%= image_tag user.avatar %>
-        <%= link_to user.name, user_path(user) %> 
-        <div id="post-friend">
-          <%= render partial: "shared/friend", locals: {user: user} %>
-        </div> 
-        <div class="clearfix"></div>
+        <div class="col-xs-4 col-sm-3">
+          <%= image_tag user.avatar, class: "img-responsive img-rounded" %>
+          <%= link_to user.name, user_path(user) %> 
+          <div id="post-friend">
+            <%= render partial: "shared/friend", locals: {user: user} %>
+          </div> 
+        </div>
       <% end %>
+      <div class="clearfix"></div>
   <hr />
+      <h3>Friended</h3>
       <% @user.friended.each do |user| %>
-        <%= image_tag user.avatar %>
-        <%= link_to user.name, user_path(user) %> 
-        <div class="clearfix"></div>
+        <div class="col-xs-4 col-sm-3">
+          <%= image_tag user.avatar, class: "img-responsive img-rounded" %>
+          <%= link_to user.name, user_path(user) %> 
+        </div>
       <% end %>
+      <div class="clearfix"></div>
     </div>
     <div class="clearfix"></div>
   </div>

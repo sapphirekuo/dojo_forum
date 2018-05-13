@@ -26,8 +26,6 @@
       </div>
 
       <h4> Category </h4>  
-      <%= f.collection_check_boxes :category_id, Category.all, :id, :name %>
-
       <%= f.collection_check_boxes :category_id, Category.all, :id, :name do |category| %>
         <label class="checkbox-inline">
           <%= category.check_box %>
