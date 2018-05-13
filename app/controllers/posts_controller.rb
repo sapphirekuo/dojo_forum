@@ -1,8 +1,14 @@
 class PostsController < ApplicationController
+  before_action :authenticate_user!, :except => [:index]
   before_action :set_post, only: [:show, :edit, :update, :destroy]
 
   def index
-    @posts = Post.readable_by(current_user).order(created_at: :desc).page(params[:page]).per(20)
+    posts = Post.readable_by(current_user).where(status: "Published")
+    @q = posts.ransack(params[:q])
+
+    @posts = @q.result.order(id: :asc).page(params[:page]).per(20)
+
+    # @posts = Post.readable_by(current_user).order(created_at: :desc).page(params[:page]).per(20)
     @categories = Category.all
   end
 
