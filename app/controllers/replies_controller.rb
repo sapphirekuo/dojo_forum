@@ -25,7 +25,7 @@ class RepliesController < ApplicationController
     @post = Post.find(params[:post_id])
     @reply.destroy
     flash[:alert] = "reply was successfully deleted"
-    redirect_back(fallback_location: root_path)
+    redirect_to post_path(@post)
   end
 
   private

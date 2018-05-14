@@ -1,0 +1,3 @@
+<% html = j( render :partial => "shared/friend", :locals => { :user => user } ) %>
+var post_friend_div = $("#post_friend");
+$(post_friend_div).html("<%= html %>");
