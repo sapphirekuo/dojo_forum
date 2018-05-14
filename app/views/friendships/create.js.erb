@@ -1,0 +1,7 @@
+// var friendship = $("#user-to-accept-<%= user.id %>");
+// friendship.html("<%= escape_javascript(render partial: 'shared/friend', locals: {user: user}) %>");
+
+
+<% html = j( accepted ) %>
+var accept_div = $("#user-to-accept-<%= user.id %>");
+$(accept_div).html("<%= html %>");

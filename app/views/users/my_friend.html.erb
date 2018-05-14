@@ -43,16 +43,15 @@
       <% @user.friendly_to_accept.each do |user| %>
         <div class="col-xs-4 col-sm-3">
           <%= image_tag user.avatar, class: "img-responsive img-rounded" %>
-          <%= link_to user.name, user_path(user) %> 
+          <%= link_to user.name, user_path(user) %>
           <div id="post_friend">
-            <%= render partial: "shared/friend", locals: {user: user} %>
-            
+            <%= render partial: "shared/friend", locals: {user: user} %>          
           </div> 
         </div>
       <% end %>
       <div class="clearfix"></div>
   <hr />
-      <h3>Friended</h3>
+      <h3>Confirmed friends</h3>
       <% @user.friended.each do |user| %>
         <div class="col-xs-4 col-sm-3">
           <%= image_tag user.avatar, class: "img-responsive img-rounded" %>

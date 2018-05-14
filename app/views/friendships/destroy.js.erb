@@ -1,0 +1,2 @@
+var friendship = $("#user-to-ignore-<%= user.id %>");
+friendship.html("<%= escape_javascript(render partial: 'shared/friend', locals: {user: user}) %>");
