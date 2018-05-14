@@ -70,16 +70,16 @@ class PostsController < ApplicationController
 
   def update
     @post.user = current_user
-    if @post.save      
+    if @post.update_attributes(post_params)    
       if published?
         flash[:notice] = "post was successfully updated"
         @post.status = "Published"
-        @post.save
+        @post.update_attributes(post_params)
         redirect_to posts_path
       elsif draft?
         flash[:notice] = "post was save as draft"
         @post.status = "Draft"
-        @post.save
+        @post.update_attributes(post_params)
         redirect_to my_draft_user_path(current_user)
       end
       
